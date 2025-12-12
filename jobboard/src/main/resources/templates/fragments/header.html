@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<div th:fragment="site-header">
+    <h1>Campus Job Board</h1>
+
+    <nav>
+        <a th:href="@{/}">Home</a>
+
+        <span sec:authorize="isAuthenticated()">
+            |
+            <a th:href="@{/student/dashboard}" sec:authorize="hasRole('ROLE_STUDENT')">Student Dashboard</a>
+            <a th:href="@{/employer/dashboard}" sec:authorize="hasRole('ROLE_EMPLOYER')">Employer Dashboard</a>
+            <a th:href="@{/admin/dashboard}" sec:authorize="hasRole('ROLE_ADMIN')">Admin Dashboard</a>
+            |
+            <a th:href="@{/logout}">Logout</a>
+        </span>
+
+        <span sec:authorize="!isAuthenticated()">
+            |
+            <a th:href="@{/login}">Login</a>
+            <a th:href="@{/register}">Register</a>
+        </span>
+    </nav>
+    <hr/>
+</div>
+</body>
+</html>

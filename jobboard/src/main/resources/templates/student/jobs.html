@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Available Jobs</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: site-header"></div>
+<h1>Available Jobs</h1>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Employer</th>
+        <th>Location</th>
+        <th>Salary</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="job : ${jobs}">
+        <td th:text="${job.title}"></td>
+        <td th:text="${job.employer.fullName}"></td>
+        <td th:text="${job.location}"></td>
+        <td th:text="${job.salary}"></td>
+        <td th:text="${job.status}"></td>
+        <td>
+            <a th:href="@{/student/jobs/{id}/apply(id=${job.id})}">Apply</a>
+        </td>
+    </tr>
+</table>
+
+<p><a th:href="@{/student/dashboard}">Back to student dashboard</a></p>
+<div th:replace="fragments/footer :: site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pending Job Approvals</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: site-header"></div>
+<h1>Pending Job Approvals</h1>
+
+<div th:if="${param.success}">
+    <p th:switch="${param.success}">
+        <span th:case="'approved'" class="flash-success">Job approved successfully.</span>
+        <span th:case="'rejected'" class="flash-success">Job rejected successfully.</span>
+    </p>
+</div>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Employer</th>
+        <th>Location</th>
+        <th>Salary</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:if="${#lists.isEmpty(jobs)}">
+        <td colspan="5">No pending jobs to review.</td>
+    </tr>
+    <tr th:each="job : ${jobs}">
+        <td th:text="${job.title}"></td>
+        <td th:text="${job.employer.fullName}"></td>
+        <td th:text="${job.location}"></td>
+        <td th:text="${job.salary}"></td>
+        <td>
+            <form th:action="@{/admin/jobs/{id}/approve(id=${job.id})}" method="post" style="display:inline;">
+                <button type="submit">Approve</button>
+            </form>
+            <form th:action="@{/admin/jobs/{id}/reject(id=${job.id})}" method="post" style="display:inline;">
+                <button type="submit">Reject</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<p><a th:href="@{/admin/dashboard}">Back to admin dashboard</a></p>
+<div th:replace="fragments/footer :: site-footer"></div>
+</body>
+</html>

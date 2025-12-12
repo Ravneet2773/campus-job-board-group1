@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Job</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: site-header"></div>
+<h1>Edit Job</h1>
+
+<form th:action="@{/employer/jobs/{id}/edit(id=${jobId})}"
+      th:object="${jobForm}" method="post">
+    <div>
+        <label>Title:</label>
+        <input type="text" th:field="*{title}"/>
+    </div>
+    <div>
+        <label>Description:</label>
+        <textarea th:field="*{description}"></textarea>
+    </div>
+    <div>
+        <label>Location:</label>
+        <input type="text" th:field="*{location}"/>
+    </div>
+    <div>
+        <label>Salary:</label>
+        <input type="text" th:field="*{salary}"/>
+    </div>
+    <div>
+        <label>Deadline:</label>
+        <input type="date" th:field="*{deadline}"/>
+    </div>
+    <button type="submit">Save Changes</button>
+</form>
+
+<p><a th:href="@{/employer/jobs}">Back to job list</a></p>
+<div th:replace="fragments/footer :: site-footer"></div>
+</body>
+</html>

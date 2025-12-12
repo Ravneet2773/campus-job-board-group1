@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Applications</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: site-header"></div>
+<h1>My Applications</h1>
+
+<!-- flash-style messages -->
+<div th:if="${param.success}">
+    <p th:if="${param.success[0] == 'applied'}">Application submitted successfully.</p>
+</div>
+
+<div th:if="${param.error}">
+    <p th:if="${param.error[0] == 'duplicate'}">You have already applied for this job.</p>
+    <p th:if="${param.error[0] == 'notfound'}">Job not found.</p>
+</div>
+
+<table border="1">
+    <tr>
+        <th>Job Title</th>
+        <th>Employer</th>
+        <th>Status</th>
+        <th>Applied At</th>
+    </tr>
+    <tr th:each="app : ${applications}">
+        <td th:text="${app.job.title}"></td>
+        <td th:text="${app.job.employer.fullName}"></td>
+        <td th:text="${app.status}"></td>
+        <td th:text="${app.appliedAt}"></td>
+    </tr>
+</table>
+
+<p><a th:href="@{/student/jobs}">Back to available jobs</a></p>
+<p><a th:href="@{/student/dashboard}">Back to student dashboard</a></p>
+<div th:replace="fragments/footer :: site-footer"></div>
+</body>
+</html>

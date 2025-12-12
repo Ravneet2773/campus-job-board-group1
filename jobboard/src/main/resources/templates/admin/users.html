@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Management</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: site-header"></div>
+<h1>User Management</h1>
+
+<table>
+    <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    <tr th:if="${#lists.isEmpty(users)}">
+        <td colspan="5">No users found.</td>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.fullName}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.role}"></td>
+        <td th:text="${user.status}"></td>
+        <td>
+            <form th:action="@{/admin/users/{id}/toggle-status(id=${user.id})}" method="post" style="display:inline;">
+                <button type="submit"
+                        th:text="${user.status.name() == 'ACTIVE' ? 'Deactivate' : 'Activate'}">
+                </button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<p><a th:href="@{/admin/dashboard}">Back to admin dashboard</a></p>
+<div th:replace="fragments/footer :: site-footer"></div>
+</body>
+</html>

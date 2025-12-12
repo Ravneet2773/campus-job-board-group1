@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Job Applicants</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: site-header"></div>
+
+<h1 th:text="'Applicants for: ' + ${job.title}">Applicants</h1>
+
+<table>
+    <tr>
+        <th>Student Name</th>
+        <th>Student Email</th>
+        <th>Status</th>
+        <th>Applied At</th>
+    </tr>
+    <tr th:if="${#lists.isEmpty(applications)}">
+        <td colspan="4">No applications for this job yet.</td>
+    </tr>
+    <tr th:each="app : ${applications}">
+        <td th:text="${app.student.fullName}"></td>
+        <td th:text="${app.student.email}"></td>
+        <td th:text="${app.status}"></td>
+        <td th:text="${app.appliedAt}"></td>
+    </tr>
+</table>
+
+<p><a th:href="@{/employer/jobs}">Back to my jobs</a></p>
+
+<div th:replace="fragments/footer :: site-footer"></div>
+</body>
+</html>

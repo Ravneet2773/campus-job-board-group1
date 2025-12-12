@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Job Postings</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: site-header"></div>
+<h1>My Job Postings</h1>
+
+<div th:if="${param.success}">
+    <p th:switch="${param.success}">
+        <span th:case="'created'" class="flash-success">Job created successfully.</span>
+        <span th:case="'updated'" class="flash-success">Job updated successfully.</span>
+        <span th:case="'deleted'" class="flash-success">Job deleted successfully.</span>
+    </p>
+</div>
+
+<h2>Create New Job</h2>
+<form th:action="@{/employer/jobs}" th:object="${jobForm}" method="post" class="form-vertical">
+    <div class="form-row">
+        <label>Title:</label>
+        <input type="text" th:field="*{title}"/>
+        <span th:if="${#fields.hasErrors('title')}"
+              th:errors="*{title}"
+              class="flash-error"></span>
+    </div>
+    <div class="form-row">
+        <label>Description:</label>
+        <textarea th:field="*{description}"></textarea>
+        <span th:if="${#fields.hasErrors('description')}"
+              th:errors="*{description}"
+              class="flash-error"></span>
+    </div>
+    <div class="form-row">
+        <label>Location:</label>
+        <input type="text" th:field="*{location}"/>
+        <span th:if="${#fields.hasErrors('location')}"
+              th:errors="*{location}"
+              class="flash-error"></span>
+    </div>
+    <div class="form-row">
+        <label>Salary:</label>
+        <input type="text" th:field="*{salary}" placeholder="5000.00"/>
+        <span th:if="${#fields.hasErrors('salary')}"
+              th:errors="*{salary}"
+              class="flash-error"></span>
+    </div>
+    <div class="form-row">
+        <label>Deadline:</label>
+        <input type="date" th:field="*{deadline}"/>
+        <span th:if="${#fields.hasErrors('deadline')}"
+              th:errors="*{deadline}"
+              class="flash-error"></span>
+    </div>
+    <button type="submit">Save Job</button>
+</form>
+
+<h2>Existing Jobs</h2>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Location</th>
+        <th>Salary</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="job : ${jobs}">
+        <td th:text="${job.title}"></td>
+        <td th:text="${job.location}"></td>
+        <td th:text="${job.salary}"></td>
+        <td th:text="${job.status}"></td>
+        <td>
+            <a th:href="@{/employer/jobs/{id}/edit(id=${job.id})}">Edit</a>
+            |
+            <a th:href="@{/employer/jobs/{id}/delete(id=${job.id})}"
+               onclick="return confirm('Delete this job?');">Delete</a>
+            |
+            <a th:href="@{/employer/jobs/{id}/applications(id=${job.id})}">View Applicants</a>
+        </td>
+
+    </tr>
+</table>
+
+<p><a th:href="@{/employer/dashboard}">Back to employer dashboard</a></p>
+<div th:replace="fragments/footer :: site-footer"></div>
+</body>
+</html>

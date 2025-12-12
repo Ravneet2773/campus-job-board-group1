@@ -1,0 +1,82 @@
+/* Basic layout */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    max-width: 1000px;
+    background-color: #f7f7f7;
+}
+
+
+h1, h2 {
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+/* Messages */
+div[th\\:if="${param.success}"] p,
+div[th\\:if="${param.registered}"] p,
+div[th\\:if="${param.logout}"] p {
+    color: green;
+    padding: 8px 10px;
+    border: 1px solid #7cc47c;
+    background-color: #e7f7e7;
+    border-radius: 4px;
+}
+
+div[th\\:if="${param.error}"] p {
+    color: #b10000;
+    padding: 8px 10px;
+    border: 1px solid #e09b9b;
+    background-color: #fbeaea;
+    border-radius: 4px;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #ffffff;
+    margin-top: 10px;
+}
+
+
+table th, table td {
+    border: 1px solid #cccccc;
+    padding: 8px 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f0f0f0;
+}
+
+/* Links and buttons */
+a {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button, .btn {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid #0056b3;
+    background-color: #0069d9;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+button:hover, .btn:hover {
+    background-color: #0053b3;
+}
+.form-vertical .form-row {
+    margin-bottom: 10px;
+}
+
+.form-vertical label {
+    display: inline-block;
+    width: 100px;
+}

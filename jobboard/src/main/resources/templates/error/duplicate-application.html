@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Duplicate Application</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1>Duplicate Application</h1>
+<p th:text="${message}">You have already applied for this job.</p>
+<p><a th:href="@{/student/applications}">Back to my applications</a></p>
+</body>
+</html>
