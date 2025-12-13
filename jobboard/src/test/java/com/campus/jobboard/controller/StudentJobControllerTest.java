@@ -49,3 +49,4 @@ class StudentJobControllerTest {
         assertEquals(1, ((Iterable<?>) model.getAttribute("jobs")).spliterator().getExactSizeIfKnown());
     }
 }
+// Integrated and reviewed by Arshdeep
